@@ -42,15 +42,14 @@ class Morpion(tk.Tk):
                 self.Canevas.create_line(px, py, px + 120, py + 120)
                 self.Canevas.create_line(px + 120, py, px, py + 120)
                 self.flag = 0
-
-                pygame.mixer.init()
-                pygame.mixer.music.load("son_1.mp3")
-                pygame.mixer.music.play(loops=0)
+                #   pygame.mixer.init()
+                #   pygame.mixer.music.load("son_1.mp3")
+                #   pygame.mixer.music.play(loops=0)
             else:
                 self.Canevas.create_oval(px, py, px + 120, py + 120)
                 self.flag = 1
-                pygame.mixer.music.load("son_2.mp3")
-                pygame.mixer.music.play(loops=0)
+                #   pygame.mixer.music.load("son_2.mp3")
+                #   pygame.mixer.music.play(loops=0)
         else:
             print("Are you an idiot ? You can't play here my friend")
 
@@ -59,25 +58,35 @@ class Morpion(tk.Tk):
         def clic(event):
             pos_x = event.x
             pos_y = event.y
-            valid = 0
-            if pos_x < 50:
+            valid_x = 0
+            valid_y = 0
+            if pos_x < 50 or pos_x > 500:
                 print("Incorrect position. Try again.")
             elif pos_x < 200:
                 pos_x = 65
+                valid_x = 1
             elif pos_x < 350:
                 pos_x = 215
-            elif pos_x < 500:
+                valid_x = 1
+            elif pos_x <= 500:
                 pos_x = 365
+                valid_x = 1
 
-            if pos_y < 200:
+            if pos_y < 50 or pos_y > 500:
+                print("Incorrect position. Try again.")
+            elif pos_y < 200:
                 pos_y = 65
+                valid_y = 1
             elif pos_y < 350:
                 pos_y = 215
-            elif pos_y < 500:
+                valid_y = 1
+            elif pos_y <= 500:
                 pos_y = 365
+                valid_y = 1
 
-            self.move(pos_x, pos_y)
-            self.moves.append((pos_x, pos_y))
+            if valid_x and valid_y:
+                self.move(pos_x, pos_y)
+                self.moves.append((pos_x, pos_y))
 
         self.Canevas.bind('<Button-1>', clic)
 
