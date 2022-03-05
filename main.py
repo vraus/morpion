@@ -1,8 +1,6 @@
 import tkinter as tk
 import pygame
-from playsound import playsound
 from tkinter import *
-import time
 
 
 class Morpion(tk.Tk):
@@ -61,7 +59,10 @@ class Morpion(tk.Tk):
         def clic(event):
             pos_x = event.x
             pos_y = event.y
-            if pos_x < 200:
+            valid = 0
+            if pos_x < 50:
+                print("Incorrect position. Try again.")
+            elif pos_x < 200:
                 pos_x = 65
             elif pos_x < 350:
                 pos_x = 215
@@ -74,6 +75,7 @@ class Morpion(tk.Tk):
                 pos_y = 215
             elif pos_y < 500:
                 pos_y = 365
+
             self.move(pos_x, pos_y)
             self.moves.append((pos_x, pos_y))
 
@@ -86,4 +88,3 @@ class Morpion(tk.Tk):
 if __name__ == '__main__':
     pygame.mixer.init()
     f1 = Morpion()
-
